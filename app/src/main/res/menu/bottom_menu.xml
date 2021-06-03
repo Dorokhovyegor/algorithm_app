@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_menu_algorithms"
+        android:icon="@drawable/ic_algorithms"
+        android:title="@string/bottom_menu_algorithms" />
+    <item
+        android:id="@+id/bottom_menu_data_structures"
+        android:icon="@drawable/ic_data_structures"
+        android:title="@string/bottom_menu_data_structures" />
+    <item
+        android:id="@+id/bottom_menu_questions"
+        android:icon="@drawable/ic_questions"
+        android:title="@string/bottom_menu_questions" />
+</menu>

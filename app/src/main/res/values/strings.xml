@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Android Review App</string>
+    <string name="act_splash_title">Android Review App</string>
+    <string name="bottom_menu_algorithms">Алгоритмы</string>
+    <string name="bottom_menu_data_structures">Структуры</string>
+    <string name="bottom_menu_questions">Вопросы</string>
+    <string name="frag_algorithm_toolbar_title">Алгоритмы</string>
+    <string name="frag_algorithm_details_show_implementation">Показать реализацию</string>
+</resources>
