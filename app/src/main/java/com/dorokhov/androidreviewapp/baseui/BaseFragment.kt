@@ -17,23 +17,39 @@ abstract class BaseFragment<VM : BaseVm> : Fragment() {
 
     var firstLaunch: Boolean = true
 
+    /**
+     * Установка layout
+     * */
     abstract val layout: Int
 
-    protected abstract fun getVmClass(): Class<VM>
+    /**
+     * Все подписки во вью оказываются здесь, отчищается в onDestroyView()
+     * */
+    protected val binds: CompositeDisposable = CompositeDisposable()
 
     protected val vmFactoryWrapper = VmFactoryWrapper()
 
+    protected abstract fun getVmClass(): Class<VM>
+
     protected open fun getVmFactory(): ViewModelProvider.Factory = vmFactoryWrapper.factory
 
-    protected val binds: CompositeDisposable = CompositeDisposable()
+    /**
+     * Для внедрения зависисомтей использовать только эту функцию
+     * */
+    abstract fun inject()
 
-    // вызывается один раз при первом старте
-    open fun init() {}
+    /**
+     * Вызывается один раз при первом старте
+     */
+    open fun onFirstStart() {}
 
-    // добавлять биндинги, подписки восстановятся
+    /**
+     * Добавление биндингов
+     * */
     open fun createBinds() {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        inject()
         super.onCreate(savedInstanceState)
         vm.restoreState(savedInstanceState)
     }
@@ -54,7 +70,7 @@ abstract class BaseFragment<VM : BaseVm> : Fragment() {
     override fun onResume() {
         super.onResume()
         if (firstLaunch) {
-            init()
+            onFirstStart()
             firstLaunch = false
         }
     }

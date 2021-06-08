@@ -5,5 +5,5 @@
     <string name="bottom_menu_data_structures">Структуры</string>
     <string name="bottom_menu_questions">Вопросы</string>
     <string name="frag_algorithm_toolbar_title">Алгоритмы</string>
-    <string name="frag_algorithm_details_show_implementation">Показать реализацию</string>
+    <string name="frag_algorithm_details_show_implementation">Реализация</string>
 </resources>

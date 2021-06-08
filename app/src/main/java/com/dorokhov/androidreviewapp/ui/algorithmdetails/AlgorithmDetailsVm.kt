@@ -1,5 +1,6 @@
 package com.dorokhov.androidreviewapp.ui.algorithmdetails
 
+import androidx.lifecycle.MutableLiveData
 import com.dorokhov.androidreviewapp.baseui.BaseVm
 import com.dorokhov.androidreviewapp.domain.IAlgorithmRepository
 import com.dorokhov.androidreviewapp.ui.algorithms.model.AlgorithmModel
@@ -11,27 +12,22 @@ import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
 import javax.inject.Inject
 
-class AlgorithmDetailsVm @Inject constructor(
-    val algorithmRepository: IAlgorithmRepository
+class AlgorithmDetailsVm
+@Inject constructor(
+    private val algorithmRepository: IAlgorithmRepository
 ) : BaseVm() {
 
-    val algorithmState = BehaviorSubject.create<AlgorithmModel>()
+    val algorithm: MutableLiveData<AlgorithmModel> = MutableLiveData()
 
     override fun createVmBinds() {
         algorithmRepository.getAlgorithm(1)
             .map { AlgorithmMapper.convertToPresentation(it) }
             .subscribeOn(Schedulers.io())
             .subscribe({
-                Timber.tag("Op").i("${it}")
-                algorithmState.onNext(it)
+                algorithm.postValue(it)
             }, {
                 Timber.e(it)
             })
             .addTo(binds)
     }
-
-    fun getAlgorithm(): Observable<AlgorithmModel> {
-        return algorithmState
-    }
-
 }

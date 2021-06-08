@@ -29,12 +29,11 @@ class AlgorithmsFragment : BaseFragment<AlgorithmVm>(), AlgorithmClickListener {
 
     override fun getVmClass() = AlgorithmVm::class.java
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun inject() {
         ComponentsHolder.appComponent.apply {
             inject(vmFactoryWrapper)
             inject(this@AlgorithmsFragment)
         }
-        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
