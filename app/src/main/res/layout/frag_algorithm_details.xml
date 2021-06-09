@@ -159,6 +159,16 @@
                 app:layout_constraintVertical_bias="0.0"
                 tools:text="Пример описания алгоритма" />
 
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/frag_algorithm_details_sandbox"
+                android:name="com.dorokhov.androidreviewapp.ui.sandbox.sort.SandboxSortFragment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frag_algorithm_full_description" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

@@ -9,6 +9,7 @@ import com.dorokhov.androidreviewapp.ui.MainActivity
 import com.dorokhov.androidreviewapp.ui.TabContainerFragment
 import com.dorokhov.androidreviewapp.ui.algorithmdetails.AlgorithmDetailsFragment
 import com.dorokhov.androidreviewapp.ui.algorithms.AlgorithmsFragment
+import com.dorokhov.androidreviewapp.ui.sandbox.sort.SandboxSortFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -21,7 +22,8 @@ import javax.inject.Singleton
         VmModule::class,
         GlideModule::class,
         NavigationModule::class,
-        LocalNavigationModule::class
+        LocalNavigationModule::class,
+        AlgorithmModule::class
     ]
 )
 @Singleton
@@ -37,6 +39,7 @@ interface AppComponent {
     fun inject(containerFragment: TabContainerFragment)
     fun inject(algorithmsFragment: AlgorithmsFragment)
     fun inject(algorithmDetailsFragment: AlgorithmDetailsFragment)
+    fun inject(sandBoxFragment: SandboxSortFragment)
     fun inject(vmFactoryWrapper: VmFactoryWrapper)
     fun inject(baseApp: AppLifecycleWrapper)
     fun inject(mainActivity: MainActivity)
