@@ -18,6 +18,8 @@ class AlgorithmDetailsVm
 ) : BaseVm() {
 
     val algorithm: MutableLiveData<AlgorithmModel> = MutableLiveData()
+    val fullDescriptionVisible: MutableLiveData<Boolean> = MutableLiveData(false)
+    val implementationVisible: MutableLiveData<Boolean> = MutableLiveData(false)
 
     override fun createVmBinds() {
         algorithmRepository.getAlgorithm(1)
@@ -29,5 +31,13 @@ class AlgorithmDetailsVm
                 Timber.e(it)
             })
             .addTo(binds)
+    }
+
+    fun changeVisibilityDescription() {
+        fullDescriptionVisible.value = fullDescriptionVisible.value?.not()
+    }
+
+    fun changeVisibilityImplementation() {
+        implementationVisible.value = implementationVisible.value?.not()
     }
 }

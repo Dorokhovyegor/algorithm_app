@@ -6,4 +6,6 @@
     <string name="bottom_menu_questions">Вопросы</string>
     <string name="frag_algorithm_toolbar_title">Алгоритмы</string>
     <string name="frag_algorithm_details_show_implementation">Реализация</string>
+    <string name="fad_open_text">Показать полностью...</string>
+    <string name="fad_close_text">Скрыть полное описание</string>
 </resources>

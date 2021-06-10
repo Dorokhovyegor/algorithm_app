@@ -100,6 +100,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/fad_sb_text_size"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/frag_algorithm_details_title_source_code"
+                    app:layout_constraintVertical_bias="0.0" />
+
                 <HorizontalScrollView
                     android:id="@+id/fad_hsv"
                     android:layout_width="0dp"
@@ -108,9 +122,10 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/frag_algorithm_details_title_source_code">
+                    app:layout_constraintTop_toBottomOf="@id/fad_sb_text_size">
 
                     <TextView
                         android:id="@+id/frag_algorithm_details_code_view"
@@ -127,19 +142,6 @@
 
                 </HorizontalScrollView>
 
-                <androidx.appcompat.widget.AppCompatSeekBar
-                    android:id="@+id/fad_sb_text_size"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/fad_hsv" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -150,6 +152,8 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
+                android:ellipsize="end"
+                android:maxLines="5"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -157,7 +161,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/frag_algorithm_details_source_code_root"
                 app:layout_constraintVertical_bias="0.0"
-                tools:text="Пример описания алгоритма" />
+                tools:text="Очень длинное описание какое-то очень замудренного алгоритма " />
+
+            <TextView
+                android:id="@+id/fad_tv_open_close"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:paddingBottom="16dp"
+                android:text="@string/fad_open_text"
+                android:textColor="#006AFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frag_algorithm_full_description" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/frag_algorithm_details_sandbox"

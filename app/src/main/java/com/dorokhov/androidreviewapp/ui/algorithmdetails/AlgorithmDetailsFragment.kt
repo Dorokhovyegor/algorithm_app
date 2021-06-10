@@ -21,8 +21,6 @@ class AlgorithmDetailsFragment : BaseFragment<AlgorithmDetailsVm>() {
     @Inject
     lateinit var requestManager: RequestManager
 
-    var implementationIsShown: Boolean = false
-
     override fun getVmClass(): Class<AlgorithmDetailsVm> = AlgorithmDetailsVm::class.java
 
     override fun inject() {
@@ -37,11 +35,18 @@ class AlgorithmDetailsFragment : BaseFragment<AlgorithmDetailsVm>() {
         vm.algorithm.observe(viewLifecycleOwner) {
             setAlgorithmContent(it)
         }
+
+        vm.fullDescriptionVisible.observe(viewLifecycleOwner) { fullDescriptionVisibility ->
+            changeDescriptionLayoutParams(fullDescriptionVisibility)
+        }
+
+        vm.implementationVisible.observe(viewLifecycleOwner) { implementationVisibility ->
+            setImplementationVisibility(implementationVisibility)
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        setImplementationVisibility(implementationIsShown)
         configView()
         initListeners()
     }
@@ -64,8 +69,11 @@ class AlgorithmDetailsFragment : BaseFragment<AlgorithmDetailsVm>() {
         })
 
         fad_btn_show_close.setOnClickListener {
-            implementationIsShown = implementationIsShown.not()
-            setImplementationVisibility(implementationIsShown)
+            vm.changeVisibilityImplementation()
+        }
+
+        fad_tv_open_close.setOnClickListener {
+            vm.changeVisibilityDescription()
         }
     }
 
@@ -79,15 +87,26 @@ class AlgorithmDetailsFragment : BaseFragment<AlgorithmDetailsVm>() {
         fad_sb_text_size.toVisibleOrGone(isVisible)
     }
 
+    private fun changeDescriptionLayoutParams(fullVisibility: Boolean) {
+        if (fullVisibility) {
+            frag_algorithm_full_description.maxLines = 100
+            fad_tv_open_close.text = getString(R.string.fad_close_text)
+
+        } else {
+            frag_algorithm_full_description.maxLines = 5
+            fad_tv_open_close.text = getString(R.string.fad_open_text)
+            frag_algorithm_details_nsv.scrollTo(0, 0)
+        }
+    }
+
     private fun changeTextSize(progress: Int) {
-        var newSize = if (progress == 0) 8f else 8f * (progress / 50f)
-        if (newSize <= 8f) newSize = 8f
+        val newSize = 8f + (progress / 50f) * 8f
         frag_algorithm_details_code_view.textSize = newSize
     }
 
     private fun setAlgorithmContent(algorithmModel: AlgorithmModel) {
         frag_algorithm_details_toolbar_title.text = algorithmModel.title
         frag_algorithm_details_code_view.text = (algorithmModel.sourceCode)
-        frag_algorithm_full_description.text = algorithmModel.fullDescription
+        frag_algorithm_full_description.text = algorithmModel.shortDescription
     }
 }

@@ -3,6 +3,7 @@ package com.dorokhov.androidreviewapp.ui.sandbox.sort
 import com.dorokhov.androidreviewapp.R
 import com.dorokhov.androidreviewapp.baseui.BaseFragment
 import com.dorokhov.androidreviewapp.di.ComponentsHolder
+import com.dorokhov.androidreviewapp.extensions.toVisibleOrGone
 import kotlinx.android.synthetic.main.frag_sand_box_sort.*
 
 class SandboxSortFragment : BaseFragment<SandboxSortVm>() {
@@ -26,11 +27,25 @@ class SandboxSortFragment : BaseFragment<SandboxSortVm>() {
         }
 
         vm.numbers.observe(viewLifecycleOwner) { generatedNumbers ->
-            if (generatedNumbers.size > 20) {
-                fsbd_et_elements.setText("Слишком много элементов для показа")
+            if (generatedNumbers != null && generatedNumbers.size > 20) {
+                fsbd_et_elements.setText("Слишком много элементов для показа (количетсво элементов ${generatedNumbers.size})")
             } else {
-                fsbd_et_elements.setText(generatedNumbers.toString())
+                if (generatedNumbers != null) {
+                    StringBuilder().apply {
+                        for (number in generatedNumbers) {
+                            this.append("$number,")
+                        }
+                    }.also {
+                        fsbd_et_elements.text = (it.toString().take(it.toString().length - 1))
+                    }
+                } else {
+                    fsbd_et_elements.text = ""
+                }
             }
+        }
+
+        vm.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            fsds_root_loading.toVisibleOrGone(isLoading)
         }
     }
 
@@ -47,10 +62,10 @@ class SandboxSortFragment : BaseFragment<SandboxSortVm>() {
         fsbd_btn_sort.setOnClickListener {
             vm.startSort()
         }
-    }
 
-    private fun getArrayValue(): String {
-        return fsbd_et_elements.text.toString()
+        fsbd_btn_reset.setOnClickListener {
+            vm.reset()
+        }
     }
 
     private fun getSize(): Int {

@@ -12,26 +12,26 @@ object AndroidDefaultContent {
                 "Отличительной особенностью быстрой сортировки является операция разбиения массива на две части относительно опорного элемента. Например, если последовательность требуется упорядочить по возрастанию, то в левую часть будут помещены все элементы, значения которых меньше значения опорного элемента, а в правую элементы, чьи значения больше или равны опорному.\n" +
                 "\n" +
                 "Вне зависимости от того, какой элемент выбран в качестве опорного, массив будет отсортирован, но все же наиболее удачным считается ситуация, когда по обеим сторонам от опорного элемента оказывается примерно равное количество элементов. Если длина какой-то из получившихся в результате разбиения частей превышает один элемент, то для нее нужно рекурсивно выполнить упорядочивание, т. е. повторно запустить алгоритм на каждом из отрезков.",
-        sourceCode = "fun customQuickSort1(array: Array<Int>, start: Int, end: Int) {\n" +
+        sourceCode = "fun quickSort(array: Array<Int>, start: Int, end: Int) {\n" +
                 "    if (start >= end) return\n" +
-                "    var numberInWrongPlaceStart = start\n" +
-                "    var numberInWrongPlaceEnd = end\n" +
-                "    var pivot = numberInWrongPlaceStart - (numberInWrongPlaceStart - numberInWrongPlaceEnd) / 2\n" +
-                "    while (numberInWrongPlaceStart < numberInWrongPlaceEnd) {\n" +
-                "        while (numberInWrongPlaceStart < pivot && array[numberInWrongPlaceStart] <= array[pivot]) {\n" +
-                "            numberInWrongPlaceStart++\n" +
+                "    var startEl = start\n" +
+                "    var endEl = end\n" +
+                "    var pivot = startEl - (startEl - endEl) / 2\n" +
+                "    while (startEl < endEl) {\n" +
+                "        while (startEl < pivot && array[startEl] <= array[pivot]) {\n" +
+                "            startEl++\n" +
                 "        }\n" +
-                "        while (numberInWrongPlaceEnd > pivot && array[pivot] <= array[numberInWrongPlaceEnd]) {\n" +
-                "            numberInWrongPlaceEnd--\n" +
+                "        while (endEl > pivot && array[pivot] <= array[endEl]) {\n" +
+                "            endEl--\n" +
                 "        }\n" +
                 "\n" +
-                "        if (numberInWrongPlaceStart < numberInWrongPlaceEnd) {\n" +
-                "            val temp = array[numberInWrongPlaceStart]\n" +
-                "            array[numberInWrongPlaceStart] = array[numberInWrongPlaceEnd]\n" +
-                "            array[numberInWrongPlaceEnd] = temp\n" +
+                "        if (startEl < endEl) {\n" +
+                "            val temp = array[startEl]\n" +
+                "            array[startEl] = array[endEl]\n" +
+                "            array[endEl] = temp\n" +
                 "            when {\n" +
-                "                numberInWrongPlaceStart == pivot -> pivot = numberInWrongPlaceEnd\n" +
-                "                numberInWrongPlaceEnd == pivot -> pivot = numberInWrongPlaceStart\n" +
+                "                startEl == pivot -> pivot = endEl\n" +
+                "                endEl == pivot -> pivot = startEl\n" +
                 "            }\n" +
                 "        }\n" +
                 "    }\n" +
