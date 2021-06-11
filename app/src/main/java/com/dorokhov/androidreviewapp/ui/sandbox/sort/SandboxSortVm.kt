@@ -39,7 +39,7 @@ class SandboxSortVm
     fun startSort() {
         Single.fromCallable {
             isLoading.postValue(true)
-            val algorithm = algorithmProvider.provideAlgorithm(AlgorithmType.QuickSort)
+            val algorithm = algorithmProvider.provideAlgorithm(AlgorithmType.InsertionSort)
             numbers.value ?: throw IllegalStateException("Array is null")
             val currentTime = System.currentTimeMillis()
             val sortedNumbers = algorithm.sort(numbers.value!!)

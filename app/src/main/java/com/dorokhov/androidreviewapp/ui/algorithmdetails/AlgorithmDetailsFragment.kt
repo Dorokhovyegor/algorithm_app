@@ -8,8 +8,6 @@ import com.dorokhov.androidreviewapp.di.ComponentsHolder
 import com.dorokhov.androidreviewapp.extensions.rotateWithAnimation
 import com.dorokhov.androidreviewapp.extensions.toVisibleOrGone
 import com.dorokhov.androidreviewapp.ui.algorithms.model.AlgorithmModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.frag_algorithm_details.*
 import javax.inject.Inject
 
@@ -95,7 +93,10 @@ class AlgorithmDetailsFragment : BaseFragment<AlgorithmDetailsVm>() {
         } else {
             frag_algorithm_full_description.maxLines = 5
             fad_tv_open_close.text = getString(R.string.fad_open_text)
-            frag_algorithm_details_nsv.scrollTo(0, 0)
+            frag_algorithm_details_nsv.scrollTo(
+                frag_algorithm_full_description.x.toInt(),
+                frag_algorithm_full_description.y.toInt()
+            )
         }
     }
 
